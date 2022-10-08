@@ -46,6 +46,22 @@ const [employs, setEmploys] = useState(getDataLs());
     localStorage.setItem('employs', JSON.stringify(employs));
   }, [employs]);
 
+  // delete employ
+  const deleteEmploy = (id) => {
+    const newEmploys = employs.filter((employ) => employ.id !== id); 
+    setEmploys(newEmploys);
+  }
+
+  // edit employ
+  const editEmploy = (id) => {
+    const newEmploys = employs.filter((employ) => employ.id !== id); 
+    const employ = employs.find((employ) => employ.id === id);
+    setEmploys(newEmploys);
+    setName(employ.name);
+    setEmail(employ.email);
+    setPhone(employ.phone);
+    setId(employ.id);
+  }
 
 
   return (
@@ -87,6 +103,7 @@ const [employs, setEmploys] = useState(getDataLs());
                 <th scope='col'>Employee ID</th>
                 <th scope='col'>Employee Email</th>
                 <th scope='col'>Employee Phone</th>
+                <th scope='col'>Action</th>
                  
               </tr>
             </thead>  
@@ -98,6 +115,8 @@ const [employs, setEmploys] = useState(getDataLs());
                       <td>{employ.id}</td>
                       <td>{employ.email}</td>
                       <td>{employ.phone}</td>
+                      <td><button className='btn btn-danger' onClick={() => deleteEmploy(employ.id)}>Delete</button> & <button className='btn btn-warning' onClick={() => editEmploy(employ.id)}>Edit</button></td>
+                    
                     </tr>
                   )
                 })} 
